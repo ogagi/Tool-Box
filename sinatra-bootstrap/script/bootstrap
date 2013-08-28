@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Script to generate a basic structure for a sinatra[1] app
+# Made because I'm a very lazy person
+
+# [1] http://www.sinatrarb.com/
+
+# Locate the app
+# Name the app
+# Generate folder structure
+
+BASE_PATH=$PWD
+
+echo "Sinatra Bootstrap"
+echo "-----------------"
+
+read -p "Place your App in (default $HOME/src) >>  " APP_PATH
+if [ -z $APP_PATH ]; then
+    cd $HOME/src
+else
+    cd $APP_PATH
+fi
+
+read -p "Name your App >> " APP_NAME
+if [ -d $APP_NAME ]; then
+    echo "Folder already exists..."
+    read -p "Pick other name for your App >>  " APP_NAME
+    mkdir $APP_NAME && cd $APP_NAME
+else
+    mkdir $APP_NAME && cd $APP_NAME
+fi
+
+echo "Generating folder structure ..."
+mkdir -p views public public/javascript public/css public/images 
+echo "Copying templates ..."
+cp $BASE_PATH/templates/application.css public/css/
+cp $BASE_PATH/templates/app.rb .
+cp $BASE_PATH/templates/config.ru .
+cp $BASE_PATH/templates/models.rb .
+cp $BASE_PATH/templates/Gemfile .
+cp $BASE_PATH/templates/index.haml views/
+ 
+echo ""
+echo "-------------------------------------"
+echo "Done! This is what you have to start:"
+echo "-------------------------------------"
+echo "$APP_NAME/"
+echo "  public/"
+echo "    public/css"
+echo "    public/images"
+echo "    public/javascript"
+echo "  views/"
+echo "  app.rb"
+echo "  models.rb"
+echo "  Gemfile"
+echo "  config.ru"
+echo "-------------------------------------"
+echo ""
+echo "Run 'bundle install' and 'rackup' and see what happens"
