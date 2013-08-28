@@ -8,6 +8,8 @@
 # Locate the app
 # Name the app
 # Generate folder structure
+# Copy templates
+
 
 BASE_PATH=$PWD
 
